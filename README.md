@@ -1,2 +1,2 @@
-"# Bevasarlo-lista" 
-"# Bevasarlo-lista" 
+| Bevásárló lista |
+| Készítette: Csanádi Kevin, Kővágó Levente |

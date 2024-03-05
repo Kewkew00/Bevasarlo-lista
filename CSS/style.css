@@ -1,0 +1,14 @@
+h1, footer {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+body {
+    background-color: #B4B4B8;
+    color: #F2EFE5;
+}
+
+footer {
+    background-color: #C7C8CC;
+}
