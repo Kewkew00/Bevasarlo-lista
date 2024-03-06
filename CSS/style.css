@@ -5,14 +5,14 @@ h1, footer {
 }
 
 body {
-    background-color: #B4B4B8;
-    color: #F2EFE5;
+    background-color: #393646;
+    color: #F4EEE0;
     padding: 20px;
     
 }
 
 footer {
-    background-color: #C7C8CC;
+    background-color: #393646;
 }
 div{
     display: flex;
