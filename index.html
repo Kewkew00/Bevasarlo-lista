@@ -18,7 +18,66 @@
     <header>
         <h1>Bevásárló lista</h1>
     </header>
-
+    <div>
+      <div class="dropdawn .col-2">
+        <label for="category" class="form-label">Category</label>
+        <select class="form-select" id="category" required="">
+            <option value="">Choose...</option>
+            <option>United States</option>
+        </select>
+      </div>
+      <div class="dropdawn .col-2">
+          <label for="category" class="form-label">Category</label>
+        <select class="form-select" id="category" required="">
+            <option value="">Choose...</option>
+            <option>United States</option>
+        </select>
+      </div>
+      <div class="dropdawn .col-2">
+          <label for="quantity" class="form-label"> Menyiség</label> 
+          <input type="number" id="quantity" name="quantity" min="1" max="100">  
+      </div>
+      <div class="dropdawn .col-2">
+        <label for="quantity" class="form-label"> Egységár</label>
+        <input  id="quantity" name="quantity" >
+      </div>
+      <div class="dropdawn">
+        <label for="quantity" class="form-label"> Összesen</label>
+        <input  id="quantity" name="quantity" >
+      </div>
+      <div class="dropdawn .col-2">
+        <label for="quantity" class="form-label"> Felvesz</label>
+        <input type="submit">
+      </div>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Kategoria</th>
+            <th scope="col">Termeknev</th>
+            <th scope="col">Menyiség</th>
+            <th scope="col">Egységár</th>
+            <th scope="col">Össz Ár</th>
+            <th scope="col">Módosit</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>1,015</td>
+            <td>random</td>
+            <td>tabular</td>
+            <td>information</td>
+            <td>text</td>
+            <td>information</td>
+            <td>text</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <footer> | Készítette: Csanádi Kevin, Kővágó Levente | </footer>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
