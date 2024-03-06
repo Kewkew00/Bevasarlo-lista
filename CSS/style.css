@@ -5,15 +5,13 @@ h1, footer {
 }
 
 body {
-    background-color: #393646;
+    background: rgb(57,54,70);
+    background: linear-gradient(90deg, rgba(57,54,70,1) 0%, rgba(79,69,87,1) 100%);
     color: #F4EEE0;
     padding: 20px;
     
 }
 
-footer {
-    background-color: #393646;
-}
 div{
     display: flex;
     
