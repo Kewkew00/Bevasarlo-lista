@@ -1,0 +1,43 @@
+GET http://localhost:3000
+
+###
+
+GET http://localhost:3000/employees
+
+###
+
+GET http://localhost:3000/employees/2
+
+###
+
+POST http://localhost:3000/employees
+content-type: application/json
+
+{
+    "name" : "Imre", 	
+    "address" : "Baja", 	
+    "phone" : "06204445566", 	
+    "email" : "imi@gmail.com", 	
+    "post" : "postás", 	
+    "price" : 4500	
+}
+
+###
+
+PATCH http://localhost:3000/employees/7
+content-type: application/json
+
+{
+    "name" : "Sanyi", 	
+    "address" : "Baja", 	
+    "phone" : "06708888888", 	
+    "email" : "sanyi@gmail.com", 	
+    "post" : "főnök", 	
+    "price" : 14500	
+}
+
+###
+
+DELETE http://localhost:3000/employees/5
+
+###
