@@ -161,7 +161,7 @@ function adatHozzaadas(){
         var frissit = document.createElement('input');
         frissit.type = "button";
         frissit.className = "btn btn-success";
-        frissit.value = "()";
+        frissit.value = "+";
         frissit.onclick = function frissites(){
             td5.innerHTML = egysegar.value * mennyiseg.value;
             
@@ -200,7 +200,10 @@ function adatHozzaadas(){
 }
 
 function teljesTorles(){
-    tbody.remove();
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+    //tbody.remove();
     fizetendoSzamitas();
 }
 
