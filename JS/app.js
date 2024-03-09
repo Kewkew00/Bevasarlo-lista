@@ -11,9 +11,6 @@ let hozzaadottItemek = [];
 let vegosszeg = 0;
 
 
-
-
-
 axios.get('http://localhost:3000/bevasarlolista_').then(res => {
 
     itemek = res.data;
@@ -98,13 +95,10 @@ axios.get('http://localhost:3000/hozzaad').then(res => {
         mennyiseg.className = "form-control";
         mennyiseg.value = user.quantity;
 
-        
-        
         td1.innerHTML = user.category;
         td2.innerHTML = user.productname;
         td4.innerHTML = user.unitprice;
         td5.innerHTML = user.unitprice * user.quantity;
-        
 
         td3.appendChild(mennyiseg);
         td6.appendChild(frissit);
@@ -117,8 +111,6 @@ axios.get('http://localhost:3000/hozzaad').then(res => {
         tr.appendChild(td6);
         tbody.appendChild(tr);
         fizetendoSzamitas();
-       
-      
     })
 });
 
@@ -128,28 +120,22 @@ function termeknevValtozas(){
         if (kategoria.value == itemek[i].category){
             if (termeknev.value == itemek[i].productname) {
                 egysegar.value = itemek[i].price;
-            
             }
         }
     }
 }
-
 function mennyisegValtozas(){
    osszeg.value = mennyisegID.value * egysegar.value;
 }
-
-
-
 function adatHozzaadas(){
 
-        let tr = document.createElement('tr');
-        let td1 = document.createElement('td');
-        let td2 = document.createElement('td');
-        let td3 = document.createElement('td');
-        let td4 = document.createElement('td');
-        let td5 = document.createElement('td');
-        let td6 = document.createElement('td');
-
+            let tr = document.createElement('tr');
+            let td1 = document.createElement('td');
+            let td2 = document.createElement('td');
+            let td3 = document.createElement('td');
+            let td4 = document.createElement('td');
+            let td5 = document.createElement('td');
+            let td6 = document.createElement('td');
         var btn = document.createElement('input');
         btn.type = "button";
         btn.className = "btn btn-danger";
@@ -157,59 +143,43 @@ function adatHozzaadas(){
         btn.onclick = function torles(){
             tr.remove();
         }
-
         var frissit = document.createElement('input');
         frissit.type = "button";
         frissit.className = "btn btn-success";
         frissit.value = "+";
         frissit.onclick = function frissites(){
-            td5.innerHTML = egysegar.value * mennyiseg.value;
-            
+            td5.innerHTML = egysegar.value * mennyiseg.value;    
         };
-
-
         var mennyiseg = document.createElement('input');
         mennyiseg.type = "number";
         mennyiseg.className = "form-control";
         mennyiseg.value = mennyisegID.value;
-
         let ar = egysegar.value * mennyiseg.value
-        
-
-        td1.innerHTML = kategoria.value;
-        td2.innerHTML = termeknev.value;
-        td4.innerHTML = egysegar.value;
-        td5.innerHTML = ar;
-        
-
-        td3.appendChild(mennyiseg);
-        td6.appendChild(frissit);
-        td6.appendChild(btn);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        tr.appendChild(td4);
-        tr.appendChild(td5);
-        tr.appendChild(td6);
-        tbody.appendChild(tr);
-        hozzaadottItemek.push({"category":kategoria.value,"productname":termeknev.value,"quantity":mennyiseg.value,"unitprice":egysegar.value,"price":ar});
+            td1.innerHTML = kategoria.value;
+            td2.innerHTML = termeknev.value;
+            td4.innerHTML = egysegar.value;
+            td5.innerHTML = ar;
+            td3.appendChild(mennyiseg);
+            td6.appendChild(frissit);
+            td6.appendChild(btn);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            tr.appendChild(td4);
+            tr.appendChild(td5);
+            tr.appendChild(td6);
+            tbody.appendChild(tr);
+            hozzaadottItemek.push({"category":kategoria.value,"productname":termeknev.value,"quantity":mennyiseg.value,"unitprice":egysegar.value,"price":ar});
         fizetendoSzamitas();
-        console.log (hozzaadottItemek);
-        
-   
 }
-
 function teljesTorles(){
     while (tbody.firstChild) {
         tbody.removeChild(tbody.firstChild);
     }
-    //tbody.remove();
     fizetendoSzamitas();
 }
-
 function mentes() {
     let promises = [];
-
     for (let i = 0; i < hozzaadottItemek.length; i++) {
         let data = {
             category: hozzaadottItemek[i].category,
@@ -236,16 +206,11 @@ function mentes() {
             console.error("Hiba történt a mentésnél:", error);
         });
 }
-
-
 function fizetendoSzamitas(){
     let osszeg = 0;
     for (let i = 0; i < hozzaadottItemek.length; i++) {
         osszeg += hozzaadottItemek[i].price;
-        
     }
-    
     fizetendo.value = osszeg;
-
 }
 
