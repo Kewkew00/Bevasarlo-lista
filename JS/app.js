@@ -11,6 +11,7 @@ let hozzaadottItemek = [];
 let vegosszeg = 0;
 
 
+
 axios.get('http://localhost:3000/bevasarlolista_').then(res => {
 
     itemek = res.data;
@@ -63,7 +64,7 @@ axios.get('http://localhost:3000/bevasarlolista_').then(res => {
 
 }); 
 
-axios.get('http://localhost:3000/hozzaad').then(res => {
+axios.get('http://localhost:3000/hozzaad_').then(res => {
     hozzaadottItemek = res.data;
     hozzaadottItemek.forEach(user => {
 
@@ -99,6 +100,7 @@ axios.get('http://localhost:3000/hozzaad').then(res => {
         td2.innerHTML = user.productname;
         td4.innerHTML = user.unitprice;
         td5.innerHTML = user.unitprice * user.quantity;
+
 
         td3.appendChild(mennyiseg);
         td6.appendChild(frissit);
@@ -189,7 +191,7 @@ function mentes() {
             price: hozzaadottItemek[i].price
         };
         promises.push(
-            axios.post('http://localhost:3000/hozzaad', data)
+            axios.post('http://localhost:3000/hozzaad_', data)
                 .then(response => {
                     console.log("Adat sikeresen elmentve:", response.data);
                 })

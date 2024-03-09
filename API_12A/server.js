@@ -25,8 +25,8 @@ app.get('/bevasarlolista_', (req, res) => {
   });
 });
 
-app.get('/hozzaad', (req, res) => {
-  pool.query('SELECT * from hozzaad', function (error, results) {
+app.get('/hozzaad_', (req, res) => {
+  pool.query('SELECT * from hozzaad_', function (error, results) {
     if (error) {
       res.status(500).send(error);
     }else{
