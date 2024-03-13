@@ -239,10 +239,20 @@ function adatHozzaadas(){
         fizetendoSzamitas();
 }
 function teljesTorles(){
-    while (tbody.firstChild) {
-        tbody.removeChild(tbody.firstChild);
-    }
-    fizetendoSzamitas();
+    
+        axios.delete('http://localhost:3000/torles_')
+            .then(response => {
+                while (tbody.firstChild) {
+                    tbody.removeChild(tbody.firstChild);
+                }
+                hozzaadottItemek = []; // Az adatokat tartalmazó tömbet is töröljük
+                fizetendoSzamitas();
+            })
+            .catch(error => {
+                console.error("Hiba történt az adatok törlése közben:", error);
+            });
+    
+    
 }
 function mentes() {
     /*let promises = [];

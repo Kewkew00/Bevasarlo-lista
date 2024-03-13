@@ -63,6 +63,18 @@ app.post('/hozzaad_', (req, res) => {
       });
   });
 });
+// ...
+app.delete('/torles_', (req, res) => {
+  pool.query('DELETE FROM hozzaad_', function (error, results) {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.status(200).send('Az összes adat sikeresen törölve az adatbázisból');
+    }
+  });
+});
+// ...
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
