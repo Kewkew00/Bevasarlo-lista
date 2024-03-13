@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
 const port = 3000;
@@ -12,6 +13,8 @@ var pool  = mysql.createPool({
   database        : 'bevasarlolista'
 });
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.get('/bevasarlolista_', (req, res) => {
@@ -35,7 +38,31 @@ app.get('/hozzaad_', (req, res) => {
  
   });
 });
+app.post('/hozzaad_', (req, res) => {
+  const { category, productname, quantity, unitprice, price } = req.body;
 
+  // Ellenőrzés: validáció, adatok érvényességének ellenőrzése, stb.
+  if (!category || !productname || !quantity || !unitprice || !price) {
+    return res.status(400).send('Hiányzó vagy érvénytelen adatok');
+  }
+
+  // Először töröljük az összes meglévő rekordot az adatbázisból
+  pool.query('DELETE FROM hozzaad_', function (deleteError, deleteResults) {
+    if (deleteError) {
+      return res.status(500).send(deleteError);
+    }
+
+    // Most frissíthetjük az adatbázist az új adatokkal
+    pool.query('INSERT INTO hozzaad_ (category, productname, quantity, unitprice, price) VALUES (?, ?, ?, ?, ?)',
+      [category, productname, quantity, unitprice, price], function (insertError, insertResults) {
+        if (insertError) {
+          res.status(500).send(insertError);
+        } else {
+          res.status(200).send('Adatok sikeresen frissítve az adatbázisban');
+        }
+      });
+  });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
