@@ -8,20 +8,41 @@ body {
     background: rgb(57,54,70);
     background: linear-gradient(90deg, rgba(57,54,70,1) 0%, rgba(79,69,87,1) 100%);
     color: #F4EEE0;
-    padding: 20px;
+    padding: 10px;
     
 }
 
 div{
-    display: flex;
-    
+    display: flex;   
     padding: 10px;
     flex-direction: row;
 }
 .dropdawn{
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column;   
 }
 
+@media only screen and (max-width: 855px) {
+    .inputs {
+      flex-direction: column;
+    }
+
+   
+}
+
+.buttons {
+    display: flex;
+    margin: 10px;
+    width: auto;
+}
+
+#fizetendo {
+    width: 150px;
+}
+
+.vegosszeg { 
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
 
