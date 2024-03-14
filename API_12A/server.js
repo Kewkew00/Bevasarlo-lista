@@ -16,7 +16,6 @@ var pool  = mysql.createPool({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-
 app.get('/bevasarlolista_', (req, res) => {
   pool.query('SELECT * from bevasarlolista_', function (error, results) {
     if (error) {
@@ -27,7 +26,6 @@ app.get('/bevasarlolista_', (req, res) => {
  
   });
 });
-
 app.get('/hozzaad_', (req, res) => {
   pool.query('SELECT * from hozzaad_', function (error, results) {
     if (error) {
@@ -63,7 +61,6 @@ app.post('/hozzaad_', (req, res) => {
       });
   });
 });
-// ...
 app.delete('/torles_', (req, res) => {
   pool.query('DELETE FROM hozzaad_', function (error, results) {
     if (error) {
@@ -73,9 +70,6 @@ app.delete('/torles_', (req, res) => {
     }
   });
 });
-// ...
-
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

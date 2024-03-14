@@ -28,18 +28,18 @@ axios.get('http://localhost:3000/bevasarlolista_').then(res => {
         }
     });
       
-    // Második legördülő lista (kiválasztott kategóriához tartozó elemek)
+    
     let termeknev = document.querySelector('#termeknev');
         
-    // Eseményfigyelő a kategória kiválasztásához
+    
     kategoria.addEventListener('change', function () {
-        // Töröld az összes meglévő opciót a második listából
+       
         termeknev.innerHTML = "";
 
-        // Kiválasztott kategória
+        
         let selectedCategory = this.value;
 
-        // Szűrd ki azokat az elemeket, amik a kiválasztott kategóriához tartoznak
+        
         let filteredItems = itemek.filter(user => user.category === selectedCategory);
 
         // Adj hozzá új opciókat a második listához
@@ -50,78 +50,7 @@ axios.get('http://localhost:3000/bevasarlolista_').then(res => {
             termeknev.add(optionItem);
         });
     });
-    /*   
-    // Eseményfigyelő a második legördülő lista kiválasztásához
-    termeknev.addEventListener('change', function () {
-        // A kiválasztott elem szövege
-        let selectedOptionText = this.value;
-        //console.log(selectedOptionText);
-    });*/
-    
-
-
-
-
 }); 
-/*
-axios.get('http://localhost:3000/hozzaad_').then(res => {
-    hozzaadottItemek = res.data;
-    hozzaadottItemek.forEach(user => {
-
-        let tr = document.createElement('tr');
-        let td1 = document.createElement('td');
-        let td2 = document.createElement('td');
-        let td3 = document.createElement('td');
-        let td4 = document.createElement('td');
-        let td5 = document.createElement('td');
-        let td6 = document.createElement('td');
-
-        var btn = document.createElement('input');
-        btn.type = "button";
-        btn.className = "btn btn-danger";
-        btn.value = "-";
-        btn.onclick = function torles(){
-            tr.remove();
-        }
-        var frissit = document.createElement('input');
-        frissit.type = "button";
-        frissit.className = "btn btn-success";
-        frissit.value = "()";
-        frissit.onclick = function frissites(){
-            td5.innerHTML = mennyiseg.value * user.unitprice;
-        };
-        
-        var mennyiseg = document.createElement('input');
-        mennyiseg.type = "number";
-        mennyiseg.className = "form-control";
-        mennyiseg.value = user.quantity;
-
-        td1.innerHTML = user.category;
-        td2.innerHTML = user.productname;
-        td4.innerHTML = user.unitprice;
-        td5.innerHTML = user.unitprice * user.quantity;
-
-
-        td3.appendChild(mennyiseg);
-        td6.appendChild(frissit);
-        td6.appendChild(btn);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        tr.appendChild(td4);
-        tr.appendChild(td5);
-        tr.appendChild(td6);
-        tbody.appendChild(tr);
-        fizetendoSzamitas();
-    })
-});
-*/
-
-
-
-// Egyesítjük az egysegar és az mennyisegID változókat
-
-
 axios.get('http://localhost:3000/hozzaad_').then(res => {
     hozzaadottItemek = res.data;
     
@@ -141,6 +70,8 @@ axios.get('http://localhost:3000/hozzaad_').then(res => {
             btn.value = "-";
             btn.onclick = function torles(){
                 tr.remove();
+                fizetendoSzamitas();
+                mennyisegValtozas()
             }
 
             var frissit = document.createElement('input');
@@ -151,6 +82,7 @@ axios.get('http://localhost:3000/hozzaad_').then(res => {
                 user.quantity = mennyisegID.value;  // Frissítjük a mennyiséget a tömbben
                 td5.innerHTML = user.unitprice * user.quantity;
                 fizetendoSzamitas();
+                mennyisegValtozas()
             };
 
             var mennyiseg = document.createElement('input');
@@ -174,12 +106,9 @@ axios.get('http://localhost:3000/hozzaad_').then(res => {
             tr.appendChild(td6);
             tbody.appendChild(tr);
             fizetendoSzamitas();
+            mennyisegValtozas()
     })
 });
-
-// ... további kód ...
-
-
 function termeknevValtozas(){
     for (let i = 0; i < itemek.length; i++) {
         console.log(kategoria.value);
@@ -190,6 +119,7 @@ function termeknevValtozas(){
         }
     }
 }
+
 function mennyisegValtozas(){
    osszeg.value = mennyisegID.value * egysegar.value;
 }
@@ -208,13 +138,17 @@ function adatHozzaadas(){
         btn.value = "-";
         btn.onclick = function torles(){
             tr.remove();
+            fizetendoSzamitas();
+            mennyisegValtozas()
         }
         var frissit = document.createElement('input');
         frissit.type = "button";
         frissit.className = "btn btn-success";
         frissit.value = "+";
         frissit.onclick = function frissites(){
-            td5.innerHTML = egysegar.value * mennyiseg.value;    
+            td5.innerHTML = egysegar.value * mennyiseg.value;  
+            fizetendoSzamitas();  
+            mennyisegValtozas()
         };
         var mennyiseg = document.createElement('input');
         mennyiseg.type = "number";
@@ -238,6 +172,7 @@ function adatHozzaadas(){
             hozzaadottItemek.push({"category":kategoria.value,"productname":termeknev.value,"quantity":mennyiseg.value,"unitprice":egysegar.value,"price":ar});
         fizetendoSzamitas();
 }
+
 function teljesTorles(){
     
         axios.delete('http://localhost:3000/torles_')
@@ -254,33 +189,9 @@ function teljesTorles(){
     
     
 }
+
 function mentes() {
-    /*let promises = [];
-    for (let i = 0; i < hozzaadottItemek.length; i++) {
-        let data = {
-            category: hozzaadottItemek[i].category,
-            productname: hozzaadottItemek[i].productname,
-            quantity: hozzaadottItemek[i].quantity,
-            unitprice: hozzaadottItemek[i].unitprice,
-            price: hozzaadottItemek[i].price
-        };
-        promises.push(
-            axios.post('http://localhost:3000/hozzaad_', data)
-                .then(response => {
-                    console.log("Adat sikeresen elmentve:", response.data);
-                })
-                .catch(error => {
-                    console.error("Hiba az adat mentése közben:", error);
-                })
-        );
-    }
-    Promise.all(promises)
-        .then(() => {
-            console.log("Minden elmentve.");
-        })
-        .catch(error => {
-            console.error("Hiba történt a mentésnél:", error);
-        });*/
+    
         let promises = [];
     // Azokat az elemeket mentsd csak el újra, amelyek még nincsenek a hozzaadottItemek tömbben
     for (let i = 0; i < hozzaadottItemek.length; i++) {
@@ -312,10 +223,12 @@ function mentes() {
         });
 }
 function fizetendoSzamitas(){
+    mennyisegValtozas();
     let osszeg = 0;
     for (let i = 0; i < hozzaadottItemek.length; i++) {
         osszeg += hozzaadottItemek[i].price;
     }
     fizetendo.value = osszeg;
 }
+
 
